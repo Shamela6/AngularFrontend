@@ -11,13 +11,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <title>SwayAirApp</title>
+
+    <style>
+        /* Add some basic styling */
+        .faq {
+          margin-bottom: 20px;
+        }
+        .question {
+          font-weight: bold;
+          cursor: pointer;
+        }
+        .answer {
+          display: none;
+          margin-top: 5px;
+        }
+      </style>
+      <script>
+        // JavaScript to toggle display of answers
+        function toggleAnswer(id) {
+          var answer = document.getElementById(id);
+          if (answer.style.display === "block") {
+            answer.style.display = "none";
+          } else {
+            answer.style.display = "block";
+          }
+        }
+      </script>
+
 </head>
 
 
 <body>
     <section class="banner" id="top">
         <div class="container">
-
             <div id="search-form">
                 <div id="header">
                     <h1>Get Your Flights</h1>
@@ -25,7 +51,7 @@
 
                 <div class="flight" id="flightbox">
 
-                    <form id="flight-form" name="form" (ngSubmit)="onSubmit()">
+                    <form id="flight-form" name="form" (ngSubmit)="onSubmit()" *ngIf="showSection1">
 
 
                         <!-- FROM/TO -->
@@ -61,63 +87,70 @@
                                     <option value="Kochi">Kochi</option>
                                     <option value="Chennai">Chennai</option>
                                         </select>
-
                             </div>
-                        </div>
-
                         <!-- FROM/TO -->
-                        <div id="flight-dates ">
+                        <!--<div id="flight-dates ">-->
                             <div class="info-box ">
                                 <label>
                                       LEAVING ON
                                     </label>
                                 <input type="date" [min]="now" id="leave-date" class="form-control" required [(ngModel)]="form.date" name="date" #date="ngModel" />
-                            </div>
+                            
                             <div *ngIf=" date.dirty || date.touched" class="alert">
-
+                                
                                 <div *ngIf="date.errors?.['required']">
-                                    <a style="color: red;font-size: large;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Departure Date-required!</a>
+                                    <a style="color: red;font-size: 14px;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Departure Date-required!</a>
                                 </div>
                             </div>
-                        </div>
-
-
-
+                           
                         <!-- SEARCH BUTTON -->
-                        <div id="flight-search ">
+                        <!--<div id="flight-search ">-->
                             <div>
                                 <button type="submit " class="info-box " id="btn1">Search</button>
 
                             </div>
                         </div>
-
+                    </div>
                     </form>
                 </div>
-
 
             </div>
         </div>
 
     </section>
-    <section class="Data">
+    <section class="Data" *ngIf="showSection2">
         <table class="table">
-            <thead *ngFor="let flight of result">
-                <tr *ngFor="let new of flight.flight">
+            <th>Flight Name</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Fare</th>
+                <tr *ngFor="let new of result">
+                    <td>{{new.flightName+"- "+new.flightId}}</td>
+                    <td>{{new.departureTime}}</td>
+                    <td>{{new.arrivalTime}}</td>
+                    <td>{{"₹"+new.ticketPrice}}</td>
+                    <td>
+                        <button type="submit" class="bookNow" id="btn2" (click)="clickFunction2(new.flight_number!,form.date!)" *ngIf="isLoggedIn">View More</button>
+                        <button type="submit " class="bookNow " id="btn2" (click)="clickFunction()" *ngIf="!isLoggedIn">View More</button>
 
-                    <th>Flight number: {{new.flight_number}}</th>
-                    <th>Departure Time: {{new.departure_time}}</th>
-                    <th>Arrival Time: {{new.arrival_time}}</th>
-                    <th>
-                        <button type="submit" class="bookNow" id="btn2" (click)="clickFunction2(new.flight_number!,form.date!)" *ngIf="isLoggedIn">Book Now</button>
-                        <button type="submit " class="bookNow " id="btn2" (click)="clickFunction()" *ngIf="!isLoggedIn">Book Now</button>
 
-
-                    </th>
+                    </td>
                 </tr>
-
-            </thead>
         </table>
     </section>
+<!--<br><br><br><br><br><br><br><br><br><br><br>
+    <h1>SwayAirApp Airline Management System FAQ</h1>
+
+  <h3>What is SwayAirApp Airline Management System?</h3>
+  <p>SwayAirApp is a comprehensive airline management system designed to streamline various operations within an airline company. It includes modules for reservations, scheduling, passenger management, crew management, inventory control, and more.</p>
+
+  <h3>How can I access SwayAirApp?</h3>
+  <p>Access to SwayAirApp is typically granted through authorized login credentials provided by the airline company. Users can access the system through a web browser or dedicated software based on the setup provided by the company.</p>
+
+  <h3>What features does SwayAirApp offer?</h3>
+  <p>SwayAirApp offers a range of features including flight scheduling, ticket booking, passenger management, crew assignment, inventory control, analytics, reporting, and more. The system aims to automate and manage various aspects of airline operations.</p>
+
+-->
     <footer>
 
         <div class=" container2 ">
@@ -143,22 +176,22 @@
                     <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792
                             4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z "/>
                   </svg>
-            </div>
-
-            <span id="footer_img "> <img src="../assets/img.jpg " alt="image " style="float: left; position: relative; top: -23px; border-radius: 50%; width: 66px; height: 63px; border-style: double; margin-left: 20px; "/>
+            
+                </div>
+            <span id="footer_img "> <img src="../assets/img.jpg " alt="image " style="float: left; position: relative; top: -23px; border-radius: 50%; width: 66px; height: 63px; border-style: double; margin-left: 10px; "/>
                 <h2 style="float: left; position: relative; top: -12px; margin-left: 10px; color: whitesmoke; font-weight: bolder; ">SwayAirApp</h2>
              </span>
-            <span style="position: relative;right: -70px;;top: 13px; ">
-                <a href="/login " style="margin: 20px;color: #C1DCF9;font-size: 24px; ">Admin</a>
+            <span style="position: relative;right: 70px; ">
+             <!--   <a href="/login " style="margin: 20px;color: #C1DCF9;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: 20px; ">Admin</a>-->
             <!--<a href="/login " style="margin: 20px;color: #C1DCF9;font-size: 24px; ">Crew</a>-->
-            <a style="margin: 20px;color: #C1DCF9;font-size: 24px; ">Contact-Us</a>
+            <a style="margin: 20px;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: #C1DCF9;font-size: 20px; ">Contact-Us  &nbsp; &nbsp; contact@swayairapp.com &nbsp; &nbsp; +82 050 625798</a>
 
 
-                                    </span>
+            </span>
             <span style="float: inline-end; color: whitesmoke;font-style: italic;position: relative;bottom: -71px; ">
             </span>
-        </div>
-
+        
+    </div>
     </footer>
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js "></script>
 

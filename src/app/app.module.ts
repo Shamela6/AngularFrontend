@@ -14,6 +14,12 @@ import { RegisterComponent } from './register/register.component';
 import { CancelBookingComponent } from './cancel-booking/cancel-booking.component';
 import { SeatingComponent } from './seating/seating.component';
 import { PaymentComponent } from './payment/payment.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { WebcheckComponent } from './webcheck/webcheck.component';
+import { SortflightsComponent } from './sortflights/sortflights.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ManagequeriesComponent } from './managequeries/managequeries.component';
+import { ManageusersComponent } from './manageusers/manageusers.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +32,13 @@ import { PaymentComponent } from './payment/payment.component';
     RegisterComponent,
     CancelBookingComponent,
     SeatingComponent,
-    PaymentComponent
+    PaymentComponent,
+    AdminloginComponent,
+    WebcheckComponent,
+    SortflightsComponent,
+    DashboardComponent,
+    ManagequeriesComponent,
+    ManageusersComponent
   ],
   imports: [
     BrowserModule,

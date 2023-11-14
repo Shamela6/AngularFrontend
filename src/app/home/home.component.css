@@ -1,10 +1,18 @@
 .container {
-    background-image: url(./assets/flight2.gif);
-    background-repeat: no-repeat;
-    margin-left: 20px;
-    max-width: inherit;
+    margin-left: 60px;
+    margin-right: 0px;
+    width: 1900px;
     height: 499px;
-    margin-top: -21px;
+    background-position: center top;
+    background-size: cover;
+   
+}
+
+body{
+    min-height: 90vh;
+    background: url(./assets/plane3.gif) no-repeat;
+    background-size: cover;
+    background-position: center; 
 }
 
 .container2 {
@@ -14,6 +22,7 @@
     margin-left: 20px;
     text-align: center;
 }
+
 
 .icon {
     margin: 30px;
@@ -45,9 +54,6 @@
     color: #C1DCF9;
 }
 
-.banner {
-    display: flex;
-}
 
 
 /* Search Form */
@@ -58,26 +64,26 @@
 
 #search-form {
     border: none;
-    width: 500px;
+    width: 380px;
     position: absolute;
     right: 16px;
-    height: 479px;
-    background-color: beige;
+    height: 440px;
+    backdrop-filter: transparent;
     margin-top: 20px;
 }
 
 #header {
     height: 60px;
-    background: black;
+    backdrop-filter: transparent;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
 #header h1 {
-    color: #FFF;
+    color: #000;
     margin-left: 20px;
-    font-size: 1.3em
+    font-size: 28px;
 }
 
 .flight {
@@ -94,6 +100,8 @@ select {
     margin-top: 41px;
     flex: 1;
     border-right: 0px solid transparent;
+    font-size: 18px;
+    color: #000;
 }
 
 .info-box:last-child {
@@ -112,10 +120,10 @@ select {
     border: none;
     outline: none;
     background: white;
-    width: 100%;
+    width: 330px;
     padding: 5px;
     height: 30px;
-    border-radius: 3px;
+    border-radius: 10px;
 }
 
 #flight-info {
@@ -127,19 +135,18 @@ select {
     background: black;
     color: white;
     padding: 10px;
-    height: 50px;
-    font-size: 1.2em;
-    position: absolute;
+    height: 42px;
+    font-size: 18px;
+    top: 10px;
+    right:3px;
     bottom: 9px;
-    display: flex;
-    justify-content: center;
-    width: 95%;
-    margin-right: 10px;
+    text-align:  center;
+    width: 333px;
     border-radius: 5px;
 }
 
 #flight-depart {
-    display: flex;
+    
     justify-content: space-between;
     border-bottom: 1px dotted silver;
 }
@@ -149,10 +156,12 @@ select {
     margin: 5px;
 }
 
-.info-box #leave-date {
+.info-box1 #leave-date {
     background: white;
     margin-top: 7px;
-    width: 470px;
+    width: 270px;
+    display: flex;
+    margin-right: 0px;
     text-align: center;
     border-style: none;
 }
@@ -163,15 +172,17 @@ select {
 
 .Data {
     background-color: white;
-    width: 96.3%;
-    height: auto;
+    width: 1220px;
+    height:180px;
     margin-left: 20px;
     text-align: center;
+    color: #000;
 }
 
 .table {
     border-radius: 5px;
     background-color: white;
+    color: #000;
 }
 
 #btn2 {
@@ -183,5 +194,5 @@ select {
 }
 
 #btn2:hover {
-    background-color: #C1DCF9;
+    background-color: #3b77c0;
 }

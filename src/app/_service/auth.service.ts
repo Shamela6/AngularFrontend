@@ -22,6 +22,7 @@ export class AuthService {
   // }
   private _registerUrl = "http://localhost:8085/user/register";
   private _loginUrl = "http://localhost:8085/user/login";
+  private _aloginUrl = "http://localhost:8085/admin/login";
   
   constructor(private http:HttpClient) { }
 
@@ -30,7 +31,10 @@ export class AuthService {
   }
 
   login(user: any) {
-    return this.http.post<any>(this._loginUrl, user)
+    return this.http.post<any>(this._loginUrl,user)
+  }
+  adminlogin(user: any) {
+    return this.http.post<any>(this._aloginUrl, user)
   }
   loggedIn() {
     return !!localStorage.getItem('token')    

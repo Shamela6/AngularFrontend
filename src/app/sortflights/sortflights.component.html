@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <h4>Flight Search</h4>
+    </header>
+    <main>
+        <section id="filters" class="single-line">
+            <div class="filter">
+                <label for="price-range">Price:</label>
+                <input type="number" id="price-range" [(ngModel)]="ticketPrice" name="price-range" placeholder="Enter the Price">
+            </div>
+            <div class="filter">
+                <label for="time">Departure Time:</label>
+                <input type="time" [(ngModel)]="departureTime" id="departureTime" name="departureTime">
+            </div>
+            <div class="filter">
+              <label for="time">Arrival Time:</label>
+              <input type="time" id="arrivalTime" [(ngModel)]="arrivalTime" name="arrivalTime">
+          </div>
+            <div class="filter">
+                <label for="stops">Number of Stops:</label>
+                <select id="stops" [(ngModel)]="selectedValue" name="stops">
+                    <option value="all">All</option>
+                    <option value="0">Non-stop</option>
+                    <option value="1">Single stop</option>
+                    <option value="2">Two stops</option>
+                </select>
+            </div>
+            <div class="filter">
+                <label for="flight-type">Type of Flights:</label>
+                <select id="flight-type" [(ngModel)]="flightType" name="flight-type">
+                    <option value="all">All</option>
+                    <option value="Domestic">Domestic</option>
+                    <option value="International">International</option>
+                </select>
+            </div>
+            <button type="button" (click)="onSubmit()">Sort Flight</button>
+        </section>
+        <section id="results">
+            <!-- Display flight search results here -->
+        </section>
+    </main>
+
+    <section class="Data" *ngIf="showSection2">
+        <table class="table">
+            <th>Flight Name</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Date of Departure</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>No. of Stops</th>
+            <th>Fare</th>
+                <tr *ngFor="let new of result">
+                    <td>{{new.flightName+"- "+new.flightId}}</td>
+                    <td>{{new.flightSource}}</td>
+                    <td>{{new.flightDestination}}</td>
+                    <td>{{new.flightDate}}</td>
+                    <td>{{new.departureTime}}</td>
+                    <td>{{new.arrivalTime}}</td>
+                    <td>{{new.numOfStops}}</td>
+                    <td>{{"₹"+new.ticketPrice}}</td>
+                    <td>
+                        <button type="submit" class="bookNow" id="btn2" (click)="clickFunction2(new.flight_number!,form.date!)" *ngIf="isLoggedIn">Book Now</button>
+                        <button type="submit " class="bookNow " id="btn2" (click)="clickFunction()" *ngIf="!isLoggedIn">Book Now</button>
+
+
+                    </td>
+                </tr>
+        </table>
+    </section>
+
+
+</body>
+</html>

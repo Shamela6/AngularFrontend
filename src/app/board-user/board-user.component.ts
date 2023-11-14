@@ -5,6 +5,8 @@ import { FlightModel } from '../models/flight-model.model';
 import { PassengerModel } from '../models/passenger-model.model';
 import { BookingService } from '../_service/booking.service';
 import { TokenStorageService } from '../_service/token-storage.service';
+import { FlightSearchService } from '../_service/flightsearch.service';
+import { UserService } from '../_service/user.service';
 @Component({
   selector: 'app-board-user',
   templateUrl: './board-user.component.html',
@@ -13,8 +15,11 @@ import { TokenStorageService } from '../_service/token-storage.service';
 
 export class BoardUserComponent implements OnInit {
 
+  //form= { name:'',age:null,gender:'', seat:null };
+  formData: any = {}; 
+
  isLoggedIn=false;
- usermail:any;
+  usermail:any;
   LocalDate=new Date();
   dep_date?:any;
   flight_id?:any;
@@ -23,11 +28,14 @@ export class BoardUserComponent implements OnInit {
   passenger=new PassengerModel(this.pas_id,"",0,0,0)
   booking=new BookingModel(new Date().getUTCMilliseconds(),this.dep_date,this.LocalDate,this.flight,[this.passenger],0);
   submitted = false;
-  username:any;
+  name:any;
+  phone:number | undefined;
   message="";
+  error?: any;
+  result:any;
+  content: any;
 
-  constructor(private bookingService:BookingService,private route:ActivatedRoute ,private tokenStorageService:TokenStorageService,private router:Router) { }
-
+  constructor(private bookingService:BookingService,private route:ActivatedRoute ,private tokenStorageService:TokenStorageService,private router:Router, private userService: UserService,private search:FlightSearchService) { }
   ngOnInit(): void {
  if(this.passenger.passenger_seat<=30){this.passenger.amount=6320}
    
@@ -41,16 +49,50 @@ export class BoardUserComponent implements OnInit {
            this.flight.flight_id=this.flight_id;
            console.log(this.flight.flight_id);
 
+
+           
+           this.search.GetPnr(this.flight_id).subscribe(data=>{console.log(data);
+           this.result=data;
+           console.log(this.result);
+           return this.result;
+           },
+           err => {
+             this.content = JSON.parse(err.error).message;
+           }
+           )
+
+
+
            this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.usermail = user.email;
-      this.username=user.username;
+      this.name=user.username;
     }
     
     
     
   }
+  
+
+  onSubmit() {
+    // if (this.isFormValid()) {
+    //   // Handle successful form submission
+    //   alert('Check-in confirmed successfully! You may logout now.');
+    //   this.reloadPage();
+    //   // Alternatively, you can use a different alert library for more styled or customized alerts
+    // } else {
+    //   alert('Please fill in the required fields correctly.');
+    // }
+  }
+
+  // isFormValid(): boolean {
+  //   // Perform your form validation logic here
+  //   // For example, you can check this.formData for validity
+  //   // Return true if valid, false if not
+  //   return this.formData.pnrNumber && this.formData.Name && this.formData.email && this.formData.phone;
+  // }
+
   saveBooking(): void {
     if(this.passenger.passenger_seat>30){this.passenger.amount=8320}
 
@@ -62,7 +104,7 @@ export class BoardUserComponent implements OnInit {
       passenger:this.booking.passenger,
       otp:this.booking.otp
     }
-    this.router.navigate(['/payment/',this.username,this.passenger.amount])
+    this.router.navigate(['/payment/',this.name,this.passenger.amount])
     this.bookingService.create(data,this.usermail)
       .subscribe({
         next: (res) => {
@@ -84,8 +126,5 @@ export class BoardUserComponent implements OnInit {
   console.log(this.passenger.passenger_seat);
   console.log(this.passenger.amount);
   }
-
- 
-  
 
 }

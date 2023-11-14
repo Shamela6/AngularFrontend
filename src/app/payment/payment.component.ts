@@ -67,6 +67,7 @@ form: any = {};
       
         this.paymentId = ''; 
         this.error = ''; 
+        this.router.navigate(['/webcheck'])
         this.orderService.createOrder(this.form).subscribe(
           (        data: { secretKey: string; razorpayOrderId: string; applicationFee: string; }) => {
             this.options.key = data.secretKey;
@@ -103,6 +104,7 @@ form: any = {};
         this.orderService.updateOrder(event.detail).subscribe(
           (        data: { message: any; }) => {
             this.paymentId = data.message;
+            
           
         }
         ,

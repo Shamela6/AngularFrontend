@@ -1,0 +1,81 @@
+body {
+    min-height: 90vh;
+    background: url(./assets/plane3.gif) no-repeat;
+    background-size: cover;
+    background-position: center; 
+}
+
+.logout{
+   
+    background-color: white;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 2px;
+    margin-right: 0px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border: 4px solid #20456c;
+    background: transparent;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+}
+
+
+label {
+    margin-top: 10px;
+}
+ 
+input {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    height:38px;
+}
+
+a{
+   float: right;
+   color: #fff;
+   font-size: 18px;
+
+}
+.logout{
+    margin-right: 20px;
+    margin-top:10px;
+    color: black;
+    padding: 10px;
+    background-color: white;
+    font-size: 18px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.logout:hover{
+    background-color: #C1DCF9;
+}
+
+button {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    font-size: 18px;;
+    border: black;
+    border-radius: 3px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #C1DCF9;
+}
+
+#checkin-status {
+    margin-top: 20px;
+    text-align: center;
+}

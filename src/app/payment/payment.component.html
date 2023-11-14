@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
 </head>
-
 <body>
-    <div class="col-md-12">
+    <div class="container">
         <div class="card card-container">
+            <h4>Pay Now</h4>
             <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
                 <div class="form-group">
                     <div class="alert alert-danger" role="alert" *ngIf="error">Payment failed: {{ error }}</div>
@@ -29,18 +29,18 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label> <input type="text" class="form-control" name="email" [(ngModel)]="form.email" required #email="ngModel" />
-                    <div class="alert alert-danger" role="alert" *ngIf="f.submitted && email.invalid">Email is required!</div>
+                    <div class="alert-danger" role="alert" *ngIf="f.submitted && email.invalid">Email is required!</div>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone</label> <input type="number" class="form-control" name="phone" [(ngModel)]="form.phone" required minlength="10" maxlength="10" #phone="ngModel" />
-                    <div class="alert alert-danger" role="alert" *ngIf="f.submitted && phone.invalid">
+                    <div class="alert-danger" role="alert" *ngIf="f.submitted && phone.invalid">
                         <div *ngIf="phone.errors?.['required']">Phone is required</div>
                         <div *ngIf="phone.errors?.['minlength'] || phone.errors?.['maxlength']">Phone must be 10 digits</div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="amount">Amount</label> <input type="number" class="form-control" name="amount" [(ngModel)]="form.amount" required #amount="ngModel" />
-                    <div class="alert alert-danger" role="alert" *ngIf="f.submitted && amount.invalid">
+                    <label for="amount">Amount</label> <label type="number" style="color:white;background: transparent;" class="form-control" name="amount" [(ngModel)]="form.amount" disabled #amount="ngModel" >12000</label>
+                    <div class="alert-danger" role="alert" *ngIf="f.submitted && amount.invalid">
                         <div *ngIf="amount.errors?.['required']">Amount is required</div>
                     </div>
                 </div>
@@ -49,7 +49,6 @@
                 </div>
             </form>
         </div>
-    </div>
+</div>
 </body>
-
 </html>

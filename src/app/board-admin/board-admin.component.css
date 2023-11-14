@@ -1,0 +1,14 @@
+button{
+    width:110px;
+    padding: 10px;
+    background-color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+button:hover{
+    background-color: #3b77c0;
+}
+
+input{
+    width:114px;
+}

@@ -11,17 +11,19 @@ export class AppComponent {
   isLoggedIn = false;
   showAdminBoard = false;
   showAttendeeBoard = false;
-  username?: string;
+  userName?: string;
 
  constructor(private tokenStorageService: TokenStorageService ,private router:Router ) { }
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
+      console.log(user.userName);
+      this.userName = user.userName;
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showAttendeeBoard = this.roles.includes('ROLE_ATTENDEE');
-      this.username = user.username;
+      //this.userName = user.userName;
     }
   }
   logout(): void {

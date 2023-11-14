@@ -1,1 +1,61 @@
-<p>board-admin works!</p>
+<h4 style="margin-left: 540px; margin-top: 5px;">Flight Operations</h4>
+<br>
+&nbsp;
+<button type="submit" class="bookNow" id="btn2" (click)="onSubmitAdd()">Add</button>
+&nbsp; &nbsp; &nbsp; &nbsp;
+<button type="submit" class="bookNow" id="btn3" (click)="onSubmitUpdate()">Update</button>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<button type="submit" class="bookNow" id="btn4" (click)="onSubmitDelete()">Delete</button>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<button type="submit" class="bookNow" id="btn5" (click)="onSubmitView()">View All</button>
+<br><br>
+<section class="Data">
+    <table class="table">
+        <th>Flight Id</th>
+        <th>Flight Name</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Date of Departure</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>No. of Stops</th>
+        <th>Fare</th>
+            <tr>
+                <td><input type="number" [(ngModel)]="flightId" minlength="1"/></td>
+                <td><input type="text" [(ngModel)]="flightName"/></td>
+                <td><input type="text" [(ngModel)]="flightSource"/></td>
+                <td><input type="text" [(ngModel)]="flightDestination"/></td>
+                <td><input type="date" [(ngModel)]="flightDate"/></td>
+                <td><input type="time" [(ngModel)]="departureTime"/></td>
+                <td><input type="time" [(ngModel)]="arrivalTime"/></td>
+                <td><input type="number" [(ngModel)]="stops" minlength="1"/></td>
+                <td><input type="number" [(ngModel)]="ticketPrice" minlength="1"/></td>
+            </tr>
+    </table>
+</section>
+
+<section class="Data" *ngIf="showSection2">
+    <table class="table">
+        <th>Flight Id</th>
+        <th>Flight Name</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Date of Departure</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>No. of Stops</th>
+        <th>Fare</th>
+            <tr *ngFor="let new of result">
+                <td>{{new.flightId}}</td>
+                <td>{{new.flightName}}</td>
+                <td>{{new.flightSource}}</td>
+                <td>{{new.flightDestination}}</td>
+                <td>{{new.flightDate}}</td>
+                <td>{{new.departureTime}}</td>
+                <td>{{new.arrivalTime}}</td>
+                <td>{{new.numOfStops}}</td>
+                <td>{{"₹"+new.ticketPrice}}</td>
+            </tr>
+    </table>
+</section>
+

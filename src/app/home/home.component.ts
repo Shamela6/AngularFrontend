@@ -19,7 +19,10 @@ export class HomeComponent implements OnInit {
     arrival_location:null,
     date:null
   }
+  
     result:any;
+    showSection1: boolean = true;
+    showSection2: boolean = false;
   
   constructor(private userService: UserService,private search:FlightSearchService,private tokenStorageService: TokenStorageService ,private router:Router ) { }
 
@@ -39,11 +42,20 @@ export class HomeComponent implements OnInit {
   
 onSubmit():void{
   const{departure_location,arrival_location,date}=this.form;
-  this.search.GetFlights(departure_location,arrival_location).subscribe(data=>{console.log(data);
+  this.search.GetFlights(departure_location,arrival_location,date).subscribe(data=>{console.log(data);
   this.result=data;
   console.log(this.result);
+  setTimeout(() => {
+    // Assuming the form is successfully submitted
+    //this.showSection1 = false;
+    this.showSection2 = true;
+  }, 1000);
   return this.result;
-  })
+  },
+  err => {
+    this.content = JSON.parse(err.error).message;
+  }
+  )
   
 }
 clickFunction():void{
@@ -51,7 +63,7 @@ clickFunction():void{
   {this.router.navigate(["/login"])}
 }
 clickFunction2(flight_id:number,date:Date):void{
- {this.router.navigate(["/user",flight_id,date])}
+ {this.router.navigate(["/sortflights"])}
   
   
 }

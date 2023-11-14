@@ -6,6 +6,9 @@ export class BookingModel {
    public booking_id:number,
    public departure_date:Date,
    public booking_date:Date,
+//    public departure_location:String,
+//    public arrival_location:String,
+//    public stops:number,
    public flight:FlightModel, 
    public passenger:Array<{ passenger_id:Number,passenger_name:String,passenger_age:Number,passenger_seat:Number,amount:Number}>,
    public otp:number)

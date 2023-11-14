@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Check-In</title>
+   
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <form id="form" (ngSubmit)="onSubmit()" novalidate>
+        <h4>Flight Web Check-In</h4>
+      
+        <label for="pnr-number">PNR Number
+          <input type="number" id="pnr-number" name="pnrNumber" [(ngModel)]="formData.pnrNumber" required>
+        </label>
+      
+        <label for="name">First Name &nbsp;
+          <input type="text" id="last-name" name="Name" [(ngModel)]="formData.Name" required>
+        </label>
+      
+        <label for="email">Email &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <input type="email" id="email" name="email" [(ngModel)]="formData.email" required>
+        </label>
+
+        <label for="phone">Mobile No. &nbsp; 
+            <input type="tel" id="phone" name="phone" [(ngModel)]="formData.phone" required>
+          </label>
+      
+        <button type="submit">Check-In</button>
+      </form>
+      
+
+    <!--<form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <div class="form-group">
+            <h4>Flight Web Check-In</h4>
+            <label for="pnr">PNR Number</label>
+            <input type="number" class="form-control" name="pnr" [(ngModel)]="form.pnr" required minlength="6" maxlength="6" #pnr="ngModel" />
+            <div class="alert-danger" *ngIf="pnr.errors && f.submitted">
+                <div *ngIf="pnr.errors['required']">PNR is required</div>
+                <div *ngIf="pnr.errors['minlength'] && pnr.errors['maxlength']">
+                    PNR must be 6 digits
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">First Name</label>
+            <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required minlength="6" #name="ngModel" />
+            <div class="alert-danger" *ngIf="name.errors && f.submitted">
+                <div *ngIf="name.errors['required']">Name is required</div>
+                <div *ngIf="name.errors['minlength']">
+                    Name must be at least 6 characters
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="form.email" required minlength="6" #name="ngModel" />
+            <div class="alert-danger" *ngIf="name.errors && f.submitted">
+                <div *ngIf="name.errors['required']">Email is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phone">Mobile No.</label>
+            <input type="number" class="form-control" name="phone" [(ngModel)]="form.phone" required minlength="10" #name="ngModel" />
+            <div class="alert-danger" *ngIf="name.errors && f.submitted">
+                <div *ngIf="name.errors['required']">Mobile No. is required</div>
+                <div *ngIf="name.errors['minlength']">
+                    Mobile No. must be 10 digits
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block">Sign Up</button>
+        </div>
+        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+            Signup failed!<br />{{ errorMessage }}
+        </div>
+    </form>-->
+
+    <!--
+        <form id="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <h4>Flight Web Check-In</h4>
+            <label for="pnr-number">PNR Number:</label>
+            <input type="text" id="pnr-number" name="pnr" required>
+            <div class="alert-danger" *ngIf="name.errors && f.submitted">
+                <div *ngIf="name.errors['required']">name is required</div>
+            </div>
+
+            <label for="last-name">First Name:</label>
+            <input type="text" id="first-name" name="name" required>
+
+
+            <label for="name">name:</label>
+            <input type="name" id="name" name="name" required>
+
+
+            <label for="name">name Number:</label>
+            <input type="tel" id="name" name="name" required>
+
+
+            <button type="submit">Check-In</button>
+        </form>-->
+        <div id="checkin-status"></div>
+</body>
+</html>
