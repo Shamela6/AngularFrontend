@@ -1,20 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../_service/token-storage.service';
 import { AuthService } from '../_service/auth.service';
 import { Router } from '@angular/router';
 import { User } from 'src/user';
-
 @Component({
-  selector: 'app-adminlogin',
-  templateUrl: './adminlogin.component.html',
-  styleUrls: ['./adminlogin.component.css']
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css']
 })
-export class AdminloginComponent {
+export class LoginComponent implements OnInit {
   form = new User ("","");
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string="ADMIN";
+  roles: string[] = [];
  
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService,private router:Router ) { }
   ngOnInit(): void {
@@ -25,19 +24,15 @@ export class AdminloginComponent {
   }
   onSubmit(): void {
 
-    this.authService.adminlogin(this.form).subscribe(
+    this.authService.login(this.form).subscribe(
       data => {
-        if(this.form!=null){
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        console.log(this.roles)
-        alert("Welcome Admin")
-        //this.roles = this.tokenStorage.getUser().roles;
-        //this.reloadPage();
-        this.router.navigate(['/dashboard'])
-        }
+        this.roles = this.tokenStorage.getUser().roles;
+        this.reloadPage();
+        
       },
       err => {
         this.errorMessage = err.error.message;

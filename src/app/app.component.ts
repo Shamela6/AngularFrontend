@@ -22,7 +22,7 @@ export class AppComponent {
       this.userName = user.userName;
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showAttendeeBoard = this.roles.includes('ROLE_ATTENDEE');
+      //this.showAttendeeBoard = this.roles.includes('ROLE_ATTENDEE');
       //this.userName = user.userName;
     }
   }

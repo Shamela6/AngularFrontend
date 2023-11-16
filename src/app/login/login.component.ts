@@ -27,14 +27,20 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.form).subscribe(
       data => {
+        if(this.form!=null){
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
         console.log(data+" "+this.form.userName+" "+this.form.password)
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
+        alert("Welcome User")
         //this.reloadPage();
         this.router.navigate(['/sortflights'])
+        }
+        else{
+          alert("Invalid Credentials!")
+        }
       },
       err => {
         this.errorMessage = err.error.message;
