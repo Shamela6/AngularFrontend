@@ -5,9 +5,9 @@ button{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-button:hover{
+/* button:hover{
     background-color: #3b77c0;
-}
+} */
 
 input{
     width:114px;
